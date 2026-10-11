@@ -4,7 +4,7 @@ Tags: analytics, attribution, woocommerce, events, tracking
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,13 @@ The plugin's own script is under 12 KB gzipped, loads with `defer` in the footer
 
 == Changelog ==
 
+= 1.0.1 =
+* The plugin version is reported to WiseTrack with SDK requests.
+* WiseTrack Web SDK 2.3.2.
+* Fixed: Ethereum revenue uses the currency code ETH; existing currency conversions are updated automatically.
+* Persian admin screens, editor panels and visual picker use the Vazirmatn font.
+* New admin menu icon.
+
 = 1.0.0 =
 * First stable release.
 * Automatic page views, event rules, visual picker, smart events, debug overlay.
@@ -106,6 +113,9 @@ The plugin's own script is under 12 KB gzipped, loads with `defer` in the footer
 * Consent mode, caching and optimization plugin compatibility, multisite support, Persian translation.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Reports the app framework as WordPress, bundles WiseTrack Web SDK 2.3.2 and fixes Ethereum (ETH) revenue.
 
 = 1.0.0 =
 First stable release. Settings from 0.x test builds are migrated automatically.

@@ -212,7 +212,7 @@ Queue limits: 50 items and 24 h per visitor; unacknowledged items are re-deliver
 | `wisetrack_sdk_config` | `array $config` | Runtime config printed into the page (no visitor data!). |
 | `wisetrack_sdk_src` | `string $src, string $source, string $version` | SDK URL (local/jsDelivr/unpkg). |
 | `wisetrack_app_framework` | `string $framework` | `appFrameWork` sent to the SDK. |
-| `wisetrack_wrapper_version` | `string $version` | `ResourceWrapper.sdkVersion()` value. |
+| `wisetrack_wrapper_version` | `string $version` | `ResourceWrapper.sdkVersion()` value (default: plugin version `WISETRACK_VERSION`). |
 | `wisetrack_page_context` | `array $context` | Page context (name, displayName, params, type…). |
 | `wisetrack_screen_name` | `?string $name, string $page_type, string $naming` | Screen name before sanitizing (`null` = SDK default URL). |
 | `wisetrack_rules_for_request` | `array $rules, array $context` | Event rules printed for this URL (`$context`: `post_id`, `post_type`, `page_type`, `path`, `is_front_page`). |

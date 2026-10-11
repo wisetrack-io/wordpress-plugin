@@ -4,7 +4,17 @@ All notable changes to WiseTrack for WordPress. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [1.0.1] — 2026-10-11
+
+Bundles WiseTrack Web SDK 2.3.2.
+
+### Changed
+
+- WiseTrack Web SDK updated from 2.3.0 to 2.3.2.
+- Redesign dashboard UI/UX.
+- Persian text in the admin screens, setup wizard, editor panels and visual picker uses the
+  bundled Vazirmatn font (Arabic-script glyphs only; never loaded for visitors).
+
 
 ## [1.0.0] — 2026-10-08
 
@@ -61,4 +71,5 @@ First stable release (bundles WiseTrack Web SDK 2.3.0).
 - `/woo/cart-summary` is rate limited; settings imports are capped at 2 MB and 1000 rules.
 
 [Unreleased]: https://github.com/wisetrack-io/wordpress-plugin/releases
+[1.0.1]: https://github.com/wisetrack-io/wordpress-plugin/releases/tag/v1.0.1
 [1.0.0]: https://github.com/wisetrack-io/wordpress-plugin/releases/tag/v1.0.0

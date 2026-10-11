@@ -14,6 +14,8 @@ GNU General Public License for more details.
 Bundled third-party code:
   - WiseTrack Web SDK (assets/vendor/wisetrack-sdk/) — GPL-2.0-or-later grant,
     see assets/vendor/wisetrack-sdk/LICENSE.
+  - Vazirmatn font (assets/fonts/vazirmatn/) — SIL Open Font License 1.1,
+    Copyright (c) The Vazirmatn Project Authors, see assets/fonts/vazirmatn/OFL.txt.
   - Plugin Update Checker (lib/plugin-update-checker/, private build only) —
     MIT, Copyright (c) Janis Elsts, see lib/plugin-update-checker/license.txt.
 
