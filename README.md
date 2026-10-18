@@ -1,6 +1,6 @@
 # WiseTrack for WordPress
 
-> **Plugin version:** 1.0.1 · **Bundled SDK:** WiseTrack Web SDK 2.3.2 · **Requires:** WordPress 6.2+, PHP 7.4+ (WooCommerce 8.0+ for shop tracking) · **License:** GPL-2.0-or-later
+> **Plugin version:** 1.1.0 · **Bundled SDK:** WiseTrack Web SDK 2.3.2 · **Requires:** WordPress 6.2+, PHP 7.4+ (WooCommerce 8.0+ for shop tracking) · **License:** GPL-2.0-or-later
 >
 > 🇮🇷 نسخهٔ فارسی: [`README.fa.md`](README.fa.md)
 
@@ -72,7 +72,7 @@ release the plugin.
 | **Setup** | 6-step wizard with a real connection test, live page-naming preview and plugin auto-detection |
 | **Page views** | Automatic, with meaningful names (path / template / URL), WordPress context parameters, WPML/Polylang language, popups as dialog screens, regex-based custom names |
 | **No-code events** | Event rules editor, **visual picker** on the live site, ready-made presets, smart events (outbound links, downloads, phone/e-mail/WhatsApp/Telegram clicks, scroll depth, time on page) |
-| **Integrations** | WordPress core (login, sign-up, comments, search, 404), WooCommerce (full funnel + revenue), Contact Form 7, WPForms, Gravity Forms, Elementor Pro Forms, Fluent Forms, Elementor Pro & Popup Maker popups |
+| **Integrations** | WordPress core (login, sign-up, comments), WooCommerce (full funnel + revenue), Contact Form 7, WPForms, Gravity Forms, Elementor Pro Forms, Fluent Forms, Elementor Pro & Popup Maker popups |
 | **Page builders** | Native panels in the block editor (Gutenberg) and Elementor; attribute/class recipes for Bricks, Breakdance, Oxygen, Divi, WPBakery, Beaver Builder, Thrive, Brizy |
 | **Developers** | `data-wt-*` attributes, `wt-ev-*` classes, shortcodes, JavaScript API with early queue, PHP API, 40+ filters/actions, REST API |
 | **Operations** | Debug overlay, admin-bar status, Site Health tests, export/import, cache purge, settings migrations, self-updates (private build) |
@@ -300,10 +300,10 @@ Per-page names ([§10](#10-per-page-settings)) and custom screen names ([§8.5](
 - Supported plugins with an on/off switch each (only active plugins run).
 - Each integration event can be switched off or **renamed** (the UI shows *Sent as `…`*).
 - **Forms:** per-form on/off, custom event name and extra parameters ([§11.2](#112-forms)).
-- **Smart events:** outbound links, downloads, `tel:`, `mailto:`, WhatsApp, Telegram, scroll depth, time on page.
+- **Smart events:** outbound links, downloads, `tel:`, `mailto:`, WhatsApp, Telegram, scroll depth (25/50/75/100 %), last scroll depth, time on page, total time on page, site search, 404 pages (table in §11.1).
 - **Download extensions** (default `pdf,zip,rar,docx,xlsx,pptx,mp3,mp4,apk`).
 - **Outbound link delay** 0–500 ms — gives the SDK time to send before the browser leaves.
-- **Send the search term** (off — search terms can contain personal data).
+- **Send the search term** — inside the *Site search* item (off — search terms can contain personal data).
 - **HTML attributes and CSS classes** (`data-wt-*`, `wt-ev-*`) on/off (`attributes_enabled`).
 - **WooCommerce:** purchase trigger, revenue basis, currency conversion with a live example ([§11.3](#113-woocommerce)).
 
@@ -347,7 +347,7 @@ The SDK silently drops invalid events — the plugin validates everything first,
 
 | Section | Content |
 |---|---|
-| **Event** | Label (any language, e.g. “Hero buy button”) and event name (Latin); the normalized name is shown live. |
+| **Event** | Event name (Latin; the normalized name is shown live) and description (any language, e.g. “Hero buy button”; only shown in the admin, never sent). |
 | **Trigger** | Click · Form submit · Visible (with %) · Page load · Scroll depth · Time on page · DOM event |
 | **Target** | CSS selector + **Pick on site**. *Include children* counts clicks on icons inside the element. |
 | **Where** | All pages, or *Only* / *Except* with conditions: specific posts/pages/terms, post type, path starts with, regex. |
@@ -358,7 +358,7 @@ The SDK silently drops invalid events — the plugin validates everything first,
 
 ### 9.3 Examples
 
-**Pricing button click** — label *Gold plan buy button*, name `click_buy_gold`, trigger *Click* on `#pricing .plan-gold .btn`, *Only* path `/pricing`, params `button_text = {{element.text}}` and `plan = gold`, revenue fixed `490000` `IRT` (sent as `4900000 IRR`), *Once per page view*.
+**Pricing button click** — name `click_buy_gold`, description *Gold plan buy button*, trigger *Click* on `#pricing .plan-gold .btn`, *Only* path `/pricing`, params `button_text = {{element.text}}` and `plan = gold`, revenue fixed `490000` `IRT` (sent as `4900000 IRR`), *Once per page view*.
 
 **Pricing section seen** — trigger *Visible* 50 % on `#pricing`, name `pricing_seen`, once per session.
 
@@ -381,7 +381,7 @@ One click creates a pre-filled rule: outbound link · file download · phone cli
 4. Side panel (left in RTL, bottom sheet on mobile):
    - editable selector with live match count and a **stability score** (high / medium / low, with reasons);
    - **Select similar** (e.g. every *Add to cart* button of a product grid);
-   - suggested label and name (Persian text is transliterated: «خرید» → `click_kharid`);
+   - suggested name (Persian text is transliterated: «خرید» → `click_kharid`);
    - trigger (click / submit / visible) — inside forms: *Track the form submit instead*;
    - scope: this page / all pages of this type / whole site / current conditions / advanced;
    - parameters with live values, revenue (parsed even from «۴۹۰٬۰۰۰ تومان» → 490000), frequency;
@@ -418,7 +418,19 @@ Post types with these settings: filter `wisetrack_post_types`.
 | Login | `login` | `method: wp` | Next page view (server queue) |
 | Sign-up | `sign_up` | `method: wp` | Next page view — only self sign-ups (registration form, checkout); not accounts created by a logged-in user, WP-CLI or cron |
 | Comment | `comment_submit` | `post_id`, `post_type`, `comment_status` (`approved`/`pending`) | Next page view; never spam, content or author data |
-| Search | `search` | `results_count` (+ `search_term` only with *Send the search term*) | Search results page |
+
+Site search and 404 pages are smart events since 1.1.0 (below).
+
+**Smart events** (fixed names; switched on per kind on the Events page, in *Settings › Integrations* or in the wizard):
+
+| Smart event | Name | Params | Sent |
+|---|---|---|---|
+| Outbound / download / phone / email / WhatsApp / Telegram links | `outbound_click` / `file_download` / `phone_click` / `email_click` / `whatsapp_click` / `telegram_click` | link domain and URL, file name and extension (never numbers or addresses) | On click |
+| Scroll depth | `scroll_depth` | `percent` | Once per page at 25, 50, 75 and 100 % |
+| Last scroll depth | `scroll_max` | `percent` (deepest point, 0–100) | When the visitor leaves or closes the tab, only if it grew since the last send |
+| Time on page | `time_on_page` | `seconds` | Once per page at 30, 60 and 120 s of visible time |
+| Total time on page | `time_on_page_max` | `seconds` (visible time only) | Like *Last scroll depth* |
+| Site search | `search` | `search_term` only with *Send the search term* | Search results page |
 | Page not found | `page_not_found` | `path` | 404 page |
 
 Role exclusions use the user that logs in / signs up; anonymous REST requests (form plugins without a nonce) still recognize a logged-in visitor by the auth cookie.
@@ -976,12 +988,13 @@ add_filter( 'wisetrack_integrations', function ( $list ) {
 
 ### 18.2 Settings migrations
 
-Settings carry a schema version (`Schema::VERSION`, currently **3**). The installed version of each site is stored in the option `wisetrack_db_version`; on the first request after an update the stored settings are migrated step by step (also for updates that never run the activation hook) and `wisetrack_upgraded` fires. Imported files run the same steps: files from older versions import, files from a newer version are refused.
+Settings carry a schema version (`Schema::VERSION`, currently **4**). The installed version of each site is stored in the option `wisetrack_db_version`; on the first request after an update the stored settings are migrated step by step (also for updates that never run the activation hook) and `wisetrack_upgraded` fires. Imported files run the same steps: files from older versions import, files from a newer version are refused.
 
 | Version | Change |
 |---|---|
 | 1 → 2 | Site search and 404 moved from `smart_events.search` / `page_not_found` (0.1 builds) to the `wordpress` integration. |
 | 2 → 3 | Currency map target `EHT` → `ETH` (1.0.1). |
+| 3 → 4 | Site search and 404 moved back to `smart_events.search` / `page_not_found` (on when the WordPress integration sent them; custom names are not kept). Event rules: `label` + `notes` → `description` (when read, also for imported files) (1.1.0). |
 
 ```php
 // Your own migration on top of the built-in ones.
@@ -1130,7 +1143,7 @@ bin/release.sh                                     # checks, both zips, publish 
 | `excluded_roles` | `['administrator']` | |
 | `respect_dnt` | `false` | |
 | `exclude_bots` | `true` | |
-| `smart_events` | all `false` | `outbound, download, tel, mailto, whatsapp, telegram, scroll_depth, time_on_page` |
+| `smart_events` | all `false` | `outbound, download, tel, mailto, whatsapp, telegram, scroll_depth, scroll_max, time_on_page, time_on_page_max, search, page_not_found` |
 | `download_extensions` | `pdf,zip,rar,docx,xlsx,pptx,mp3,mp4,apk` | |
 | `outbound_delay_ms` | `0` | 0–500 |
 | `attributes_enabled` | `true` | |
@@ -1164,7 +1177,7 @@ bin/release.sh                                     # checks, both zips, publish 
 |---|---|
 | Screen / page view | A page (or dialog) view sent to WiseTrack |
 | Rule | A no-code event definition (trigger + target + where + data) |
-| Smart events | Built-in automatic events (outbound, downloads, contact links, scroll, time) |
+| Smart events | Built-in automatic events (outbound, downloads, contact links, scroll, time, search, 404) |
 | Server event queue | Per-visitor queue for events that happen in PHP |
 | Sandbox / Production | WiseTrack environments for test and real data |
 | Sanitizer | Validation layer that mirrors the SDK's rules so no event is silently dropped |

@@ -4,7 +4,7 @@ Tags: analytics, attribution, woocommerce, events, tracking
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,10 +22,10 @@ Everything works without code — and developers get attributes, shortcodes, a J
 * **Automatic page views** with clean names (by path, by template or by full URL), page type and post context, multilingual sites (WPML, Polylang) and popups as dialog screens.
 * **Visual event picker** — open any page of your site, click a button, a link or a form, name the event and save. No selectors, no code.
 * **Event rules** — clicks, form submits, elements becoming visible, scroll depth, time on page, page load and custom DOM events, with parameters from the page (element text, attributes, URL, page context), revenue and frequency limits (once per page, session or visitor).
-* **Smart events** — outbound links, downloads, phone, email, WhatsApp and Telegram links, scroll depth and time on page with one switch each.
+* **Smart events** — outbound links, downloads, phone, email, WhatsApp and Telegram links, scroll depth, last scroll depth and total time on page (sent when the visitor leaves the tab), time on page, site search and 404 pages with one switch each.
 * **WooCommerce** — `view_item`, `add_to_cart`, `remove_from_cart`, `view_cart`, `begin_checkout` and `purchase` with revenue, exactly once per order, also when the payment is confirmed later by a gateway webhook. Classic and block cart/checkout, HPOS compatible. Toman (IRT) prices are converted to Rial (IRR) automatically.
 * **Forms** — Contact Form 7, WPForms, Gravity Forms, Elementor Pro Forms and Fluent Forms submissions, with per-form names and parameters.
-* **WordPress events** — login, sign-up, comments, site search and 404 pages.
+* **WordPress events** — login, sign-up and comments.
 * **Block editor and Elementor panels** — attach an event to any block or widget in the editor you already use.
 * **Built for real sites** — works with full-page caches (WP Rocket, LiteSpeed Cache, W3 Total Cache, SiteGround Optimizer, Cloudflare…) and optimization plugins, loads asynchronously, adds less than 12 KB of JavaScript (gzipped) besides the SDK, no jQuery.
 * **Privacy controls** — consent mode (WP Consent API or your own banner), Do Not Track / Global Privacy Control, bot filtering, excluded roles, pages and query parameters, a PII guard that drops e-mail addresses and phone numbers from event data.
@@ -34,7 +34,7 @@ Everything works without code — and developers get attributes, shortcodes, a J
 
 = For developers =
 
-`data-wt-*` attributes and CSS classes, `[wisetrack_event]` and `[wisetrack_screen]` shortcodes, `window.WiseTrackWP` / `wisetrackQueue` in JavaScript, `wisetrack_track_event()` in PHP and more than 40 filters and actions. See the [developer guide](https://github.com/wisetrack-io/wordpress-plugin/blob/main/docs/DEVELOPER.md).
+`data-wt-*` attributes and CSS classes, `[wisetrack_event]` and `[wisetrack_screen]` shortcodes, `window.WiseTrackWP` / `wisetrackQueue` in JavaScript, `wisetrack_track_event()` in PHP and more than 40 filters and actions. See the [developer guide](https://github.com/wisetrack-io/wordpress-plugin#16-developer-reference).
 
 == External services ==
 
@@ -98,6 +98,12 @@ The plugin's own script is under 12 KB gzipped, loads with `defer` in the footer
 
 == Changelog ==
 
+= 1.1.0 =
+* New smart events: last scroll depth and total time on page, sent when the visitor leaves or closes the tab.
+* Scroll depth steps are 25, 50, 75 and 100 percent.
+* Site search and 404 pages are smart events; the search term option sits inside the site search item. The search event no longer sends the result count.
+* Events have a description (any language, never sent) instead of a label and notes; existing labels and notes are kept as the description.
+
 = 1.0.1 =
 * The plugin version is reported to WiseTrack with SDK requests.
 * WiseTrack Web SDK 2.3.2.
@@ -113,6 +119,9 @@ The plugin's own script is under 12 KB gzipped, loads with `defer` in the footer
 * Consent mode, caching and optimization plugin compatibility, multisite support, Persian translation.
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+New smart events for scroll depth and time on page when visitors leave. Site search and 404 become smart events (kept on where they were sent; custom names are reset). Event labels become descriptions automatically.
 
 = 1.0.1 =
 Reports the app framework as WordPress, bundles WiseTrack Web SDK 2.3.2 and fixes Ethereum (ETH) revenue.

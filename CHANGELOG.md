@@ -4,6 +4,34 @@ All notable changes to WiseTrack for WordPress. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+## [1.1.0] — 2026-10-18
+
+Bundles WiseTrack Web SDK 2.3.2. Settings schema 4 (migrated automatically).
+
+### Added
+
+- Smart event **Last scroll depth** (`scroll_max`, param `percent`): the deepest point a visitor
+  scrolled to, sent when the tab is hidden or closed (again only when it grew).
+- Smart event **Total time on page** (`time_on_page_max`, param `seconds`): visible time on the
+  page, sent the same way.
+- Event **description** (any language, multi-line, admin only, never sent) in the event editor,
+  the visual picker and the events list.
+
+### Changed
+
+- Scroll depth steps are 25, 50, 75 and **100** % (90 % removed).
+- Site search (`search`) and 404 pages (`page_not_found`) are smart events again, shown as tiles
+  next to the others; the *Send the search term* option moved into the site search item. Sites
+  where the WordPress integration sent them keep them on (custom names are not kept).
+- The search event no longer sends `results_count`.
+
+### Removed
+
+- Event **label** and **notes** fields: existing values are joined into the description (also
+  for imported files). REST `orderby=label` is gone; duplicates no longer get a “(copy)” label.
+
 ## [1.0.1] — 2026-10-11
 
 Bundles WiseTrack Web SDK 2.3.2.
@@ -71,5 +99,6 @@ First stable release (bundles WiseTrack Web SDK 2.3.0).
 - `/woo/cart-summary` is rate limited; settings imports are capped at 2 MB and 1000 rules.
 
 [Unreleased]: https://github.com/wisetrack-io/wordpress-plugin/releases
+[1.1.0]: https://github.com/wisetrack-io/wordpress-plugin/releases/tag/v1.1.0
 [1.0.1]: https://github.com/wisetrack-io/wordpress-plugin/releases/tag/v1.0.1
 [1.0.0]: https://github.com/wisetrack-io/wordpress-plugin/releases/tag/v1.0.0
