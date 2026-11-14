@@ -1,6 +1,6 @@
 # WiseTrack for WordPress
 
-> **Plugin version:** 1.1.0 · **Bundled SDK:** WiseTrack Web SDK 2.3.2 · **Requires:** WordPress 6.2+, PHP 7.4+ (WooCommerce 8.0+ for shop tracking) · **License:** GPL-2.0-or-later
+> **Plugin version:** 1.2.0 · **Bundled SDK:** WiseTrack Web SDK 2.4.0 · **Requires:** WordPress 6.2+, PHP 7.4+ (WooCommerce 8.0+ for shop tracking) · **License:** GPL-2.0-or-later
 >
 > 🇮🇷 نسخهٔ فارسی: [`README.fa.md`](README.fa.md)
 
@@ -272,8 +272,9 @@ A floating panel on the front end, enabled **per browser** (nothing is printed i
 | Automatic page views | on | A page view on every tracked page. |
 | Track dialogs | on | Popups (Elementor Pro, Popup Maker) are sent as dialog screens `popup:<id>`. |
 | Naming method | `path` | `path` → `/shop/shoes`; `template` → `single_product`, `archive_category`…; `url` → full URL without sensitive parameters. |
-| Excluded paths | — | Path prefixes that never load the SDK, e.g. `/my-account`. |
-| Excluded patterns | — | Regular expressions; check them with **Test a path**. |
+| Excluded paths | — | Path prefixes without automatic page views, e.g. `/my-account`. The SDK still loads there (events you send still work); use *Do not track* on a page or excluded roles to skip it completely. |
+| Excluded patterns | — | Regular expressions with the same effect as excluded paths; check them with **Test a path**. |
+| Diagnostics for AI coding agents | Off | Sandbox only: the SDK prints `[WT-AGENT]` lines with every server answer to the browser console, for an AI coding agent that sets up or debugs WiseTrack. |
 | Context parameters | `page_type, post_type, post_id` | WordPress context attached to page views. |
 | Sensitive query parameters | WP/Woo defaults | Stripped from URLs and tokens: `key, order, order_key, pwd, password, token, email, phone, coupon…` |
 
@@ -1106,7 +1107,7 @@ Other environments: `node bin/wp-env-matrix.mjs 'WordPress/WordPress#6.2' 7.4 no
 ### 21.5 Versions and release
 
 ```bash
-bin/sync-sdk.sh 2.3.2                              # refresh the bundled SDK (published npm package only)
+bin/sync-sdk.sh 2.4.0                              # refresh the bundled SDK (published npm package only)
 bin/bump-version.sh --plugin 1.0.2 --sdk 2.3.3     # bump plugin and/or SDK version everywhere
 bin/build-zip.sh private                           # or: wporg → dist/wisetrack-<version>-<flavor>.zip
 bin/release.sh                                     # checks, both zips, publish to GitHub Releases

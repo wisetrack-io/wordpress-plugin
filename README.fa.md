@@ -2,7 +2,7 @@
 
 # پلاگین WiseTrack برای وردپرس
 
-> **نسخهٔ پلاگین:** 1.1.0 · **SDK داخل بسته:** WiseTrack Web SDK 2.3.2 · **پیش‌نیاز:** وردپرس 6.2+، PHP 7.4+ (برای فروشگاه: ووکامرس 8.0+) · **مجوز:** GPL-2.0-or-later
+> **نسخهٔ پلاگین:** 1.2.0 · **SDK داخل بسته:** WiseTrack Web SDK 2.4.0 · **پیش‌نیاز:** وردپرس 6.2+، PHP 7.4+ (برای فروشگاه: ووکامرس 8.0+) · **مجوز:** GPL-2.0-or-later
 >
 > 🇬🇧 English version: [`README.md`](README.md)
 
@@ -1260,7 +1260,7 @@ npm run test:e2e         # Playwright against the wp-env tests site
 <div dir="ltr">
 
 ```bash
-bin/sync-sdk.sh 2.3.2                              # refresh the bundled SDK (published npm package only)
+bin/sync-sdk.sh 2.4.0                              # refresh the bundled SDK (published npm package only)
 bin/bump-version.sh --plugin 1.0.2 --sdk 2.3.3     # bump plugin and/or SDK version everywhere
 bin/build-zip.sh private                           # or: wporg → dist/wisetrack-<version>-<flavor>.zip
 bin/release.sh                                     # checks, both zips, publish to GitHub Releases

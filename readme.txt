@@ -4,7 +4,7 @@ Tags: analytics, attribution, woocommerce, events, tracking
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,11 @@ The plugin's own script is under 12 KB gzipped, loads with `defer` in the footer
 
 == Changelog ==
 
+= 1.2.0 =
+* New: diagnostics support for AI-assisted integration.
+* Fix: link click tracking.
+* Bundles WiseTrack Web SDK 2.4.0.
+
 = 1.1.0 =
 * New smart events: last scroll depth and total time on page, sent when the visitor leaves or closes the tab.
 * Scroll depth steps are 25, 50, 75 and 100 percent.
@@ -119,6 +124,9 @@ The plugin's own script is under 12 KB gzipped, loads with `defer` in the footer
 * Consent mode, caching and optimization plugin compatibility, multisite support, Persian translation.
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Diagnostics support for AI-assisted integration and a link click tracking fix.
 
 = 1.1.0 =
 New smart events for scroll depth and time on page when visitors leave. Site search and 404 become smart events (kept on where they were sent; custom names are reset). Event labels become descriptions automatically.

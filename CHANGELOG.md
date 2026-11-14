@@ -6,6 +6,18 @@ All notable changes to WiseTrack for WordPress. The format follows
 
 ## [Unreleased]
 
+## [1.2.0] — unreleased
+
+Bundles WiseTrack Web SDK 2.4.0.
+
+### Added
+
+- Diagnostics support for AI-assisted integration.
+
+### Fixed
+
+- Link click tracking fix.
+
 ## [1.1.0] — 2026-10-18
 
 Bundles WiseTrack Web SDK 2.3.2. Settings schema 4 (migrated automatically).
@@ -99,6 +111,7 @@ First stable release (bundles WiseTrack Web SDK 2.3.0).
 - `/woo/cart-summary` is rate limited; settings imports are capped at 2 MB and 1000 rules.
 
 [Unreleased]: https://github.com/wisetrack-io/wordpress-plugin/releases
+[1.2.0]: https://github.com/wisetrack-io/wordpress-plugin/releases/tag/v1.2.0
 [1.1.0]: https://github.com/wisetrack-io/wordpress-plugin/releases/tag/v1.1.0
 [1.0.1]: https://github.com/wisetrack-io/wordpress-plugin/releases/tag/v1.0.1
 [1.0.0]: https://github.com/wisetrack-io/wordpress-plugin/releases/tag/v1.0.0
